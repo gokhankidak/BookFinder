@@ -9,25 +9,29 @@
 /* Begin PBXBuildFile section */
 		9F0C8C902B021324001F9EF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C8C8F2B021324001F9EF7 /* AppDelegate.swift */; };
 		9F0C8C922B021324001F9EF7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C8C912B021324001F9EF7 /* SceneDelegate.swift */; };
-		9F0C8C942B021324001F9EF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C8C932B021324001F9EF7 /* ViewController.swift */; };
 		9F0C8C992B021328001F9EF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0C8C982B021328001F9EF7 /* Assets.xcassets */; };
-		9F0C8C9C2B021328001F9EF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F0C8C9A2B021328001F9EF7 /* LaunchScreen.storyboard */; };
 		9F0C8CA42B022204001F9EF7 /* BookData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C8CA32B022204001F9EF7 /* BookData.swift */; };
 		9F0C8CA72B0222D5001F9EF7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9F0C8CA62B0222D5001F9EF7 /* Alamofire */; };
 		9F0C8CAA2B0222E0001F9EF7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F0C8CA92B0222E0001F9EF7 /* SnapKit */; };
 		9F0C8CAC2B0222E0001F9EF7 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 9F0C8CAB2B0222E0001F9EF7 /* SnapKit-Dynamic */; };
 		9F0C8CAF2B022379001F9EF7 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9F0C8CAE2B022379001F9EF7 /* Kingfisher */; };
+		9F0C8CB42B02255E001F9EF7 /* BookSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C8CB32B02255E001F9EF7 /* BookSearchVC.swift */; };
+		9F0C8CB62B022721001F9EF7 /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0C8CB52B022721001F9EF7 /* BookCell.swift */; };
+		9FCC29962B0385190068FA8D /* ResultTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC29952B0385190068FA8D /* ResultTableView.swift */; };
+		9FCC29982B038FC70068FA8D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FCC29972B038FC70068FA8D /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9F0C8C8C2B021324001F9EF7 /* BookFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F0C8C8F2B021324001F9EF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F0C8C912B021324001F9EF7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9F0C8C932B021324001F9EF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9F0C8C982B021328001F9EF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9F0C8C9B2B021328001F9EF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F0C8C9D2B021328001F9EF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F0C8CA32B022204001F9EF7 /* BookData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookData.swift; sourceTree = "<group>"; };
+		9F0C8CB32B02255E001F9EF7 /* BookSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchVC.swift; sourceTree = "<group>"; };
+		9F0C8CB52B022721001F9EF7 /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
+		9FCC29952B0385190068FA8D /* ResultTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableView.swift; sourceTree = "<group>"; };
+		9FCC29972B038FC70068FA8D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,14 +69,40 @@
 		9F0C8C8E2B021324001F9EF7 /* BookFinder */ = {
 			isa = PBXGroup;
 			children = (
+				9F0C8CB02B0224E7001F9EF7 /* Model */,
+				9F0C8CB12B0224F5001F9EF7 /* ViewModel */,
+				9F0C8CB22B022508001F9EF7 /* View */,
 				9F0C8C8F2B021324001F9EF7 /* AppDelegate.swift */,
 				9F0C8C912B021324001F9EF7 /* SceneDelegate.swift */,
-				9F0C8C932B021324001F9EF7 /* ViewController.swift */,
 				9F0C8C982B021328001F9EF7 /* Assets.xcassets */,
-				9F0C8C9A2B021328001F9EF7 /* LaunchScreen.storyboard */,
 				9F0C8C9D2B021328001F9EF7 /* Info.plist */,
 			);
 			path = BookFinder;
+			sourceTree = "<group>";
+		};
+		9F0C8CB02B0224E7001F9EF7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9F0C8CB12B0224F5001F9EF7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9F0C8CB52B022721001F9EF7 /* BookCell.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9F0C8CB22B022508001F9EF7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9F0C8CB32B02255E001F9EF7 /* BookSearchVC.swift */,
+				9FCC29952B0385190068FA8D /* ResultTableView.swift */,
+				9FCC29972B038FC70068FA8D /* DataService.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +174,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F0C8C9C2B021328001F9EF7 /* LaunchScreen.storyboard in Resources */,
 				9F0C8C992B021328001F9EF7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,7 +185,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F0C8C942B021324001F9EF7 /* ViewController.swift in Sources */,
+				9F0C8CB62B022721001F9EF7 /* BookCell.swift in Sources */,
+				9FCC29982B038FC70068FA8D /* DataService.swift in Sources */,
+				9FCC29962B0385190068FA8D /* ResultTableView.swift in Sources */,
+				9F0C8CB42B02255E001F9EF7 /* BookSearchVC.swift in Sources */,
 				9F0C8C902B021324001F9EF7 /* AppDelegate.swift in Sources */,
 				9F0C8CA42B022204001F9EF7 /* BookData.swift in Sources */,
 				9F0C8C922B021324001F9EF7 /* SceneDelegate.swift in Sources */,
@@ -164,17 +196,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		9F0C8C9A2B021328001F9EF7 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9F0C8C9B2B021328001F9EF7 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9F0C8C9E2B021328001F9EF7 /* Debug */ = {
@@ -307,8 +328,8 @@
 				INFOPLIST_FILE = BookFinder/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -337,8 +358,8 @@
 				INFOPLIST_FILE = BookFinder/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
