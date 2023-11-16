@@ -35,14 +35,13 @@ extension ResultTableView : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookCell", for: indexPath) as! BookCell
-        let defaultImage = UIImage(named: "DefaultImage")
         let item = items[indexPath.row].volumeInfo
         cell.titleLabel.text = item.title
         
         let http = item.imageLinks?.thumbnail ?? "http://"
         let https = "https" + http.dropFirst(4)
         
-        cell.coverImage.kf.setImage(with: URL(string:https),placeholder: defaultImage)
+        cell.coverImage.kf.setImage(with: URL(string:https),placeholder: UIImage.default)
         cell.publishedYearLabel.text = item.publishedDate
         cell.publisherLabel.text = item.publisher
         

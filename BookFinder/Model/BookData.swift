@@ -29,6 +29,7 @@ struct VolumeInfo: Codable {
     let description: String?
     let categories: [String]?
     let imageLinks: ImageLinks?
+    let pageCount: Int?
     let language: String?
 }
 

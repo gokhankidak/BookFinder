@@ -10,7 +10,6 @@ import Alamofire
 enum Path : String{
     case base = "https://www.googleapis.com/books/v1/volumes"
     case requestPrefix = "?q="
-    
 }
 
 protocol DataServiceProtocol{
@@ -18,7 +17,7 @@ protocol DataServiceProtocol{
     func fectAllDatas(onSuccess: @escaping ([BookItem]) -> Void,onFail : @escaping (String) -> Void,search : String)
 }
 
-struct DataService : DataServiceProtocol{
+struct BookFinderDataService : DataServiceProtocol{
     func fectAllDatas(onSuccess: @escaping ([BookItem]) -> Void,onFail : @escaping (String) -> Void,search : String){
         
         let url = "\(Path.base.rawValue)\(Path.requestPrefix.rawValue)\(search)"

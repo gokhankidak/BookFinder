@@ -10,15 +10,21 @@ import SnapKit
 
 final class BookSearchVC : UIViewController,ResultTableViewOutput{
     
+    private let resultTableView = ResultTableView()
+    private let bookDetailVC = BookDetailVC()
+    private let dataService : DataServiceProtocol = BookFinderDataService()
+    
     private let bookFinderLabel = UILabel()
     private let searchTextField = UITextField()
     private let resultTableViewPlaceHolder = UITableView()
     
-    private let resultTableView = ResultTableView()
+    private let horizontalOffset : CGFloat = 40
+    private let labelTopOffset: CGFloat = 20
+    private let labelHeight: CGFloat = 100
+    private let minorOffset : CGFloat = 10
+    private let searchBarHeight :CGFloat = 50
     
-    private let dataService : DataServiceProtocol = DataService()
     var delegate : ResultTableViewProtocol?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,49 +36,52 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
         resultTableView.delegate = self
     }
     
-    func configUI()
-    {
+    func configUI(){
         view.addSubview(bookFinderLabel)
         makeLabel()
         view.addSubview(searchTextField)
-        makeSearchBox()
+        makeSearchBar()
         view.addSubview(resultTableViewPlaceHolder)
         makeResultTableView()
     }
     
     fileprivate func makeLabel() {
+        let headerFont = UIFont(name: "Chalkduster", size: labelHeight)
+        
         bookFinderLabel.text = "Book Finder"
         bookFinderLabel.textColor = .orange
-        bookFinderLabel.font = UIFont(name: "Chalkduster", size: 100)
+        bookFinderLabel.font = headerFont
         bookFinderLabel.textAlignment = .center
         bookFinderLabel.adjustsFontSizeToFitWidth = true
+        
         bookFinderLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-40)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(40)
-            make.height.equalTo(100)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(labelTopOffset)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-horizontalOffset)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(horizontalOffset)
+            make.height.equalTo(labelHeight)
         }
     }
     
-    fileprivate func makeSearchBox() {
+    
+    fileprivate func makeSearchBar() {
         searchTextField.placeholder = "Type author, book name, subject etc..."
         searchTextField.borderStyle = .roundedRect
         
         searchTextField.snp.makeConstraints { make in
-            make.top.equalTo(bookFinderLabel.snp.bottom).offset(10)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-40)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(40)
-            make.height.equalTo(50)
+            make.top.equalTo(bookFinderLabel.snp.bottom).offset(minorOffset)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-horizontalOffset)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(horizontalOffset)
+            make.height.equalTo(searchBarHeight)
         }
     }
     
     fileprivate func makeResultTableView() {
         resultTableViewPlaceHolder.backgroundColor = .white
         resultTableViewPlaceHolder.snp.makeConstraints { make in
-            make.top.equalTo(searchTextField.snp.bottom).offset(20)
+            make.top.equalTo(searchTextField.snp.bottom).offset(minorOffset * 2)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-10)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).offset(-minorOffset)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(minorOffset)
         }
         resultTableViewPlaceHolder.register(BookCell.self, forCellReuseIdentifier: "bookCell")
         resultTableViewPlaceHolder.rowHeight = 150
@@ -81,21 +90,20 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
     
     //MARK: Result table
     func onSelected(_ info : VolumeInfo) {
-        //TODO
+        bookDetailVC.setView(item: info)
+        present(bookDetailVC, animated: true)
     }
     
-    func fetchItems(search : String)
-    {
+    func fetchItems(search : String){
         dataService.fectAllDatas(onSuccess: onSuccess, onFail: onFail, search: search)
     }
     
     func onFail(error : String){
-        print("error : \(error)")
+        print(error)
     }
-    
+    //update table view
     func onSuccess(items : [BookItem]){
         resultTableView.update(items: items)
-        print("update table view")
         resultTableViewPlaceHolder.reloadData()
     }
 }
@@ -103,16 +111,21 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
 extension BookSearchVC : UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        resultTableViewPlaceHolder.isHidden = true
         textField.becomeFirstResponder()
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         
+        if searchTextField.text == "" { return true}
+        
         resultTableViewPlaceHolder.isHidden = false
-        fetchItems(search: textField.text ?? "")
+        fetchItems(search: searchTextField.text ?? "")
+        
         return true
     }
-    
+    //end editing when touched outside
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
