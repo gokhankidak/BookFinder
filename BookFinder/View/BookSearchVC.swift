@@ -8,11 +8,10 @@
 import SwiftUI
 import SnapKit
 
-final class BookSearchVC : UIViewController,ResultTableViewOutput{
-    
+final class BookSearchVC : UIViewController, ResultTableViewOutput{
     private let resultTableView = ResultTableView()
     private let bookDetailVC = BookDetailVC()
-    private let dataService : DataServiceProtocol = BookFinderDataService()
+    private let bookFinderVM : BookFinderViewModelProtocol = BookFinderViewModel()
     
     private let bookFinderLabel = UILabel()
     private let searchTextField = UITextField()
@@ -45,7 +44,7 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
         makeResultTableView()
     }
     
-    fileprivate func makeLabel() {
+    private func makeLabel() {
         let headerFont = UIFont(name: "Chalkduster", size: labelHeight)
         
         bookFinderLabel.text = "Book Finder"
@@ -62,8 +61,7 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
         }
     }
     
-    
-    fileprivate func makeSearchBar() {
+    private func makeSearchBar() {
         searchTextField.placeholder = "Type author, book name, subject etc..."
         searchTextField.borderStyle = .roundedRect
         
@@ -75,7 +73,7 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
         }
     }
     
-    fileprivate func makeResultTableView() {
+    private func makeResultTableView() {
         resultTableViewPlaceHolder.backgroundColor = .white
         resultTableViewPlaceHolder.snp.makeConstraints { make in
             make.top.equalTo(searchTextField.snp.bottom).offset(minorOffset * 2)
@@ -89,22 +87,17 @@ final class BookSearchVC : UIViewController,ResultTableViewOutput{
     }
     
     //MARK: Result table
-    func onSelected(_ info : VolumeInfo) {
-        bookDetailVC.setView(item: info)
+    func onSelected(index : Int) {
+        let volumeInfo = bookFinderVM.bookItems[index].volumeInfo
+        bookDetailVC.setView(item : volumeInfo)
         present(bookDetailVC, animated: true)
     }
     
     func fetchItems(search : String){
-        dataService.fectAllDatas(onSuccess: onSuccess, onFail: onFail, search: search)
-    }
-    
-    func onFail(error : String){
-        print(error)
-    }
-    //update table view
-    func onSuccess(items : [BookItem]){
-        resultTableView.update(items: items)
-        resultTableViewPlaceHolder.reloadData()
+        bookFinderVM.fetchItem(search: search,response: { items in
+            self.resultTableView.update(items: items)
+            self.resultTableViewPlaceHolder.reloadData()
+        })
     }
 }
 

@@ -14,11 +14,11 @@ enum Path : String{
 
 protocol DataServiceProtocol{
     
-    func fectAllDatas(onSuccess: @escaping ([BookItem]) -> Void,onFail : @escaping (String) -> Void,search : String)
+    func fectAllItems(search : String,onFail : @escaping (String) -> Void,onSuccess: @escaping ([BookItem]) -> Void)
 }
 
 struct BookFinderDataService : DataServiceProtocol{
-    func fectAllDatas(onSuccess: @escaping ([BookItem]) -> Void,onFail : @escaping (String) -> Void,search : String){
+    func fectAllItems(search : String,onFail : @escaping (String) -> Void,onSuccess: @escaping ([BookItem]) -> Void){
         
         let url = "\(Path.base.rawValue)\(Path.requestPrefix.rawValue)\(search)"
         AF.request(url, method: .get).validate().responseDecodable(of: BookVolume.self){(response) in

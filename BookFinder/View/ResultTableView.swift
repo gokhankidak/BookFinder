@@ -13,7 +13,7 @@ protocol ResultTableViewProtocol{
 }
 
 protocol ResultTableViewOutput : AnyObject{
-    func onSelected(_ info : VolumeInfo)
+    func onSelected(index : Int)
 }
 
 final class ResultTableView : NSObject,ResultTableViewProtocol{
@@ -22,7 +22,6 @@ final class ResultTableView : NSObject,ResultTableViewProtocol{
     
     func update(items: [BookItem]) {
         self.items = items
-
     }
     
     weak var delegate : ResultTableViewOutput?
@@ -50,6 +49,7 @@ extension ResultTableView : UITableViewDelegate,UITableViewDataSource{
                 value.append(author)
                 value.append(",")
             }
+            value.removeLast()//to get rid off extra comma
             return value
         }
         
@@ -58,6 +58,6 @@ extension ResultTableView : UITableViewDelegate,UITableViewDataSource{
 }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.onSelected(items[indexPath.row].volumeInfo)
+        delegate?.onSelected(index : indexPath.row)
     }
 }
